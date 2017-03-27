@@ -33,5 +33,6 @@ function! g:CommandLineToArgvW(cmd)
 endfunction
 
 function! g:ArgvQuote(arr)
-  return '^"'.join(map(a:arr,'substitute(v:val, "[()%!^\"<>&|]", "^&", "g")'),'^" ^"').'^"'
+  let l:arr = filter(a:arr,'v:val isnot ""')
+  return '^"'.join(map(l:arr,'substitute(v:val, "[()%!^\"<>&|]", "^&", "g")'),'^" ^"').'^"'
 endfunction
