@@ -1,7 +1,6 @@
 function! g:WinQuote(cmd)
-  let cmd = substitute(a:cmd, '\(\\\{3,}\)\ze"', '\=repeat("\\",strlen(submatch(1))/2)','g')
   let res = []
-  let total = split(cmd,'\%(\\\@<!\\\%(\\\\\)*\)\@<!"')
+  let total = split(a:cmd,'\%(\\\@<!\\\%(\\\\\)*\)\@<!"')
   if len(total) > 1
     let i = 0
     while i < len(total)
@@ -13,7 +12,7 @@ function! g:WinQuote(cmd)
             unlet res[i-1]
           endif
         endif
-        call add(res,tail.total[i])
+        call add(res,substitute(tail,'\\\{2,}$','\=repeat("\\",strlen(submatch(0))/2)','').total[i])
       else
         let res = res + split(total[i])
       endif
@@ -21,6 +20,6 @@ function! g:WinQuote(cmd)
     endwhile
     return res
   else
-    return split(cmd)
+    return split(a:cmd)
   endif
 endfunction
