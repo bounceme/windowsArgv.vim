@@ -1,5 +1,5 @@
 function! g:WinQuote(cmd)
-  let cmd = substitute(a:cmd, '\(\\\+\)\ze"', '\=repeat("\\",strlen(submatch(1))/2)','')
+  let cmd = substitute(a:cmd, '\(\\\{2,}\)\ze"', '\=repeat("\\",strlen(submatch(1))/2)','')
   let res = []
   let total = split(cmd,'\%(\\\@<!\\\%(\\\\\)*\)\@<!"')
   if len(total) > 1
