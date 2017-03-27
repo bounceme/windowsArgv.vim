@@ -1,6 +1,6 @@
 function! g:WinQuote(cmd)
   let res = []
-  let total = split(a:cmd,'\%(\\\@<!\\\%(\\\\\)*\)\@<!"')
+  let total = split(a:cmd,'\%(\\\@<!\\\%(\\\\\)*\)\@<!"',1)
   if len(total) > 1
     let i = 0
     while i < len(total)
