@@ -7,9 +7,9 @@ function! g:WinQuote(cmd)
       if i%2
         let tail = matchstr(total[i-1],'\S\@<!\S\+$')
         if strlen(tail)
-          let res[i-1] = matchstr(res[i-1],'.*\s')
-          if res[i-1] is ''
-            unlet res[i-1]
+          let res[-1] = matchstr(res[-1],'.*\s')
+          if res[-1] is ''
+            unlet res[-1]
           endif
         endif
         call add(res,substitute(tail,'\\\{2,}$','\=repeat("\\",strlen(submatch(0))/2)','').total[i])
