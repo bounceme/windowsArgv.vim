@@ -1,5 +1,6 @@
 function! g:CommandLineToArgvW(cmd)
   let res = []
+  let strrep = '\=repeat("\\",strlen(submatch(0))/2)'
   if a:cmd[0] =~ '\s'
     call add(res,'')
   endif
@@ -15,13 +16,13 @@ function! g:CommandLineToArgvW(cmd)
             unlet res[-1]
           endif
         endif
-        call add(res,substitute(tail,'\\\{2,}$','\=repeat("\\",strlen(submatch(0))/2)','').total[i])
+        call add(res,substitute(tail,'\\\{2,}$',strrep,'').total[i])
       else
         let space = split(total[i])
         if i && total[i][0] =~ '\S'
           let res[-1] = res[-1] . remove(space,0)
         endif
-        let res = res + space
+        let res = res + map(space,'substitute(v:val,''\\\+\ze"'','''.strrep.''',"g")')
       endif
       let i += 1
     endwhile
