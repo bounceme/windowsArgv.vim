@@ -1,4 +1,4 @@
-function! g:WinQuote(cmd)
+function! g:CommandLineToArgvW(cmd)
   let res = []
   let total = split(a:cmd,'\%(\\\@<!\\\%(\\\\\)*\)\@<!"',1)
   if len(total) > 1
