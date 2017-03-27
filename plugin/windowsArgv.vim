@@ -27,7 +27,7 @@ function! g:CommandLineToArgvW(cmd)
       let i += 1
     endwhile
   else
-    let res = res + split(a:cmd)
+    let res = res + map(split(a:cmd),'substitute(v:val,''\\\+\ze"'','''.strrep.''',"g")')
   endif
   return res
 endfunction
