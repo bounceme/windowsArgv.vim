@@ -14,7 +14,11 @@ function! g:WinQuote(cmd)
         endif
         call add(res,substitute(tail,'\\\{2,}$','\=repeat("\\",strlen(submatch(0))/2)','').total[i])
       else
-        let res = res + split(total[i])
+        let space = split(total[i])
+        if i && total[i][0] =~ '\S'
+          let res[-1] = res[-1] . remove(space,0)
+        endif
+        let res = res + space
       endif
       let i += 1
     endwhile
