@@ -1,5 +1,8 @@
 function! g:CommandLineToArgvW(cmd)
   let res = []
+  if a:cmd[0] =~ '\s'
+    call add(res,'')
+  endif
   let total = split(a:cmd,'\%(\\\@<!\\\%(\\\\\)*\)\@<!"',1)
   if len(total) > 1
     let i = 0
@@ -22,8 +25,8 @@ function! g:CommandLineToArgvW(cmd)
       endif
       let i += 1
     endwhile
-    return res
   else
-    return split(a:cmd)
+    let res = res + split(a:cmd)
   endif
+  return res
 endfunction
