@@ -1,3 +1,5 @@
+" TODO: add comments
+
 function! g:CommandLineToArgvW(cmd)
   let res = []
   let strrep = '\=repeat("\\",strlen(submatch(0))/2)'
