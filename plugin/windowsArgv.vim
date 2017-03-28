@@ -39,9 +39,9 @@ function! g:ArgvQuote(arr)
   if !len(l:arr)
     return
   endif
-  call map(l:arr,'substitute(v:val, ''[()%!<>&|"^]'', "^&", "g")')
+  " call map(l:arr,'substitute(v:val, ''[()%!<>&|"^]'', "^&", "g")')
   call map(l:arr,'substitute(v:val, ''\^"'', "^^&", "g")')
   call map(l:arr,'substitute(v:val, ''[()%!<>&|"^]'', "^&", "g")')
-  call map(l:arr,'substitute(v:val, ''.*\s.*'', ''^"&^"'', "g")')
+  " call map(l:arr,'substitute(v:val, ''.*\s.*'', ''^"&^"'', "g")')
   return join(l:arr)
 endfunction
