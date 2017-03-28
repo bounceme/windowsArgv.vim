@@ -34,5 +34,11 @@ endfunction
 
 function! g:ArgvQuote(arr)
   let l:arr = filter(a:arr,'v:val isnot ""')
-  return '^"'.join(map(l:arr,'substitute(v:val, "[()%!^\"<>&|]", "^&", "g")'),'^" ^"').'^"'
+  if !len(l:arr)
+    return
+  endif
+  call map(l:arr,'escape(v:val,''"'')')
+  let exe = remove(l:arr,0) . ' '
+  call map(l:arr,'substitute(v:val, ''[()%!<>&|"^]'', "^&", "g")')
+  return '^"'. exe . substitute(join(l:arr,'^" ^"'),'.\+','^"&^"','').'^"'
 endfunction
