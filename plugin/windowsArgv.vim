@@ -39,8 +39,8 @@ function! g:ArgvQuote(arr)
   if !len(l:arr)
     return
   endif
-  call map(l:arr,'escape(v:val,''"'')')
-  call map(l:arr,'substitute(v:val, ''"'', "^&", "g")')
+  call map(l:arr,'substitute(v:val, ''[()%!<>&|"^]'', "^&", "g")')
+  call map(l:arr,'substitute(v:val, ''\^"'', "^^&", "g")')
   let exe = remove(l:arr,0) . ' '
   return '^"'. exe . substitute(join(l:arr,'^" ^"'),'.\+','^"&^"','').'^"'
 endfunction
