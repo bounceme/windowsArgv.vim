@@ -11,7 +11,7 @@ function! g:CommandLineToArgvW(cmd)
     let i = 0
     while i < len(total)
       if i%2
-        let tail = matchstr(total[i-1],'\S\@<!\S\+$')
+        let tail = matchstr(total[i-1],'\S\+$')
         if strlen(tail)
           let res[-1] = matchstr(res[-1],'.*\s')
           if res[-1] is ''
