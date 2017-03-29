@@ -34,6 +34,7 @@ function! g:CommandLineToArgvW(cmd)
   return res
 endfunction
 
-function! g:Cmdexe(arr)
+function! g:Cmdexe(cmd)
   return substitute(substitute(a:cmd, '\^"', '^^&', 'g'),'[()%!<>&|"^]','^&','g')
 endfunction
+
