@@ -6,7 +6,7 @@ function! g:CommandLineToArgvW(cmd)
   if a:cmd[0] =~ '\s'
     call add(res,'')
   endif
-  let total = split(a:cmd,'\%(\\\@<!\\\%(\\\\\)*\)\@<!"',1)
+  let total = split(a:cmd,'\%(^\|[^\\]\)\%(\\\\\)*\zs"',1)
   if len(total) > 1
     let i = 0
     while i < len(total)
